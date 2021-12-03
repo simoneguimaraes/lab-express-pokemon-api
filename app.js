@@ -53,6 +53,19 @@ app.post("/pokemon", (req, res) => {
 });
 
 // A PUT /pokemon/:id route, that updates an existing Pokemon with the provided data
+app.put("/pokemon/:id", (req, res) => {
+  const id = req.params.id;
+  const formData = req.body;
+  const foundPokemon = allPokemon.find(
+    (currentPokemon) => currentPokemon.id === Number(id)
+  );
+  const pokemonIndex = allPokemon.findIndex(
+    (currentPokemon) => currentPokemon.id === Number(id)
+  );
+  if (pokemonIndex !== -1) {
+    foundPokemon[pokemonIndex] = { ...foundPokemon, ...formData };
+  }
+});
 
 // A DELETE /pokemon/:id route, that deletes an existing Pokemon and returns a success message
 
